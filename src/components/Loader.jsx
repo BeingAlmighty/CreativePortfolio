@@ -130,8 +130,7 @@ const SplitText = ({
         JSON.stringify(to),
         threshold,
         rootMargin,
-        fontsLoaded,
-        onLetterAnimationComplete
+        fontsLoaded
       ],
       scope: ref
     }
