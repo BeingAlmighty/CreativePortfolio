@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SplitText from "./Loader.jsx";
 import CodeEditor from "./CodeEditor.jsx";
 
@@ -16,56 +16,59 @@ export default function Example() {
     totalQuestions: ''
   })
 
- const leetcodeData = async () => {
-  try {
-    const response = await fetch('/api/AlmightyBeing');
-    
-    if (!response.ok) {
-      throw new Error('Primary API failed');
-    }
-
-    const data = await response.json();
-
-    setLeetcode(prev => ({
-      ...prev,
-      totalSolved: data.totalSolved,
-      Easy: data.easySolved,
-      Medium: data.mediumSolved,
-      Hard: data.hardSolved,
-      totalQuestions: data.totalQuestions,
-      totalEasy: data.totalEasy,
-      totalMedium: data.totalMedium,
-      totalHard: data.totalHard,
-    }));
-  } catch (error) {
-    console.warn('Primary API failed, switching to fallback:', error.message);
-    
+  const leetcodeData = async () => {
     try {
-      const fallbackResponse = await fetch('/api2/AlmightyBeing');
+      const response = await fetch('https://leetcode-api-faisalshohag.vercel.app/AlmightyBeing');
       
-      if (!fallbackResponse.ok) throw new Error('Fallback API failed too');
-      
-      const fallbackData = await fallbackResponse.json();
+      if (!response.ok) {
+        throw new Error('Primary API failed');
+      }
+
+      const data = await response.json();
 
       setLeetcode(prev => ({
         ...prev,
-        totalSolved: fallbackData.totalSolved,
-        Easy: fallbackData.easySolved,
-        Medium: fallbackData.mediumSolved,
-        Hard: fallbackData.hardSolved,
-        totalQuestions: fallbackData.totalQuestions,
-        totalEasy: fallbackData.totalEasy,
-        totalMedium: fallbackData.totalMedium,
-        totalHard: fallbackData.totalHard,
+        totalSolved: data.totalSolved,
+        Easy: data.easySolved,
+        Medium: data.mediumSolved,
+        Hard: data.hardSolved,
+        totalQuestions: data.totalQuestions,
+        totalEasy: data.totalEasy,
+        totalMedium: data.totalMedium,
+        totalHard: data.totalHard,
       }));
-    } catch (fallbackError) {
-      console.error('Both APIs failed:', fallbackError.message);
+    } catch (error) {
+      console.warn('Primary API failed, switching to fallback:', error.message);
+      
+      try {
+        const fallbackResponse = await fetch('https://alfa-leetcode-api.onrender.com/AlmightyBeing/solved');
+        
+        if (!fallbackResponse.ok) throw new Error('Fallback API failed too');
+        
+        const fallbackData = await fallbackResponse.json();
+
+        setLeetcode(prev => ({
+          ...prev,
+          totalSolved: fallbackData.solvedProblem || fallbackData.totalSolved,
+          Easy: fallbackData.easySolved,
+          Medium: fallbackData.mediumSolved,
+          Hard: fallbackData.hardSolved,
+          totalQuestions: fallbackData.totalQuestions,
+          totalEasy: fallbackData.totalEasy,
+          totalMedium: fallbackData.totalMedium,
+          totalHard: fallbackData.totalHard,
+        }));
+      } catch (fallbackError) {
+        console.error('Both APIs failed:', fallbackError.message);
+      }
+    } finally {
+      setLoader(false);
     }
-  } finally {
-    setLoader(false);
-  }
-};
-  leetcodeData();
+  };
+
+  useEffect(() => {
+    leetcodeData();
+  }, []);
 
 
   const SolvedCard = ({ type, totalType, typeName }) => {
