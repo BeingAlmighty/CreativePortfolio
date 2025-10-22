@@ -6,7 +6,6 @@ import Navbar from './Navbar';
 import Lenis from 'lenis'
 import Skills from './Skills';
 import About from './About';
-import Example from './Example';
 import RevealLinks from './Links';
 
 const LandingPage = () => {

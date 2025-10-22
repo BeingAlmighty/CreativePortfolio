@@ -1,10 +1,10 @@
 import React from 'react'
-import Example from './Example'
+import AboutContent from './AboutContent'
 
 const About = () => {
   return (
     <div className='bg-zinc-800 relative w-full'>
-      <Example />
+      <AboutContent />
     </div>
   )
 }

@@ -18,7 +18,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
       '/api2': {
-        target: 'https://leetcode-api-faisalshohag.vercel.app',
+        target: 'https://leetcode-stats-api.herokuapp.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },

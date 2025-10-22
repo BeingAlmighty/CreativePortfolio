@@ -16,9 +16,16 @@ export default function Example() {
     totalQuestions: ''
   })
 
-  const leetcodeData = async () => {
+ const leetcodeData = async () => {
+  try {
     const response = await fetch('/api/AlmightyBeing');
+    
+    if (!response.ok) {
+      throw new Error('Primary API failed');
+    }
+
     const data = await response.json();
+
     setLeetcode(prev => ({
       ...prev,
       totalSolved: data.totalSolved,
@@ -30,8 +37,34 @@ export default function Example() {
       totalMedium: data.totalMedium,
       totalHard: data.totalHard,
     }));
+  } catch (error) {
+    console.warn('Primary API failed, switching to fallback:', error.message);
+    
+    try {
+      const fallbackResponse = await fetch('/api2/AlmightyBeing');
+      
+      if (!fallbackResponse.ok) throw new Error('Fallback API failed too');
+      
+      const fallbackData = await fallbackResponse.json();
+
+      setLeetcode(prev => ({
+        ...prev,
+        totalSolved: fallbackData.totalSolved,
+        Easy: fallbackData.easySolved,
+        Medium: fallbackData.mediumSolved,
+        Hard: fallbackData.hardSolved,
+        totalQuestions: fallbackData.totalQuestions,
+        totalEasy: fallbackData.totalEasy,
+        totalMedium: fallbackData.totalMedium,
+        totalHard: fallbackData.totalHard,
+      }));
+    } catch (fallbackError) {
+      console.error('Both APIs failed:', fallbackError.message);
+    }
+  } finally {
     setLoader(false);
   }
+};
   leetcodeData();
 
 
