@@ -57,7 +57,7 @@ const Skills = () => {
 
   return (
     <div ref={ref} className='h-[125vh]'>
-      <div className='bg-green-500 h-[28vh] sticky top-[72vh] w-full rounded-t-4xl overflow-hidden'>
+      <div className='bg-zinc-900 h-[28vh] sticky top-[72vh] w-full overflow-hidden'>
         <div className='flex flex-col justify-center items-center h-full w-[100vw] px-8'>
           
           {/* Scroll Container */}
