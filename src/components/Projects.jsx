@@ -25,8 +25,15 @@ const Project = () => {
                 >
                     <Carousel />
 
-                    <div className="w-screen h-screen flex items-center justify-center bg-blue-500">
-                        Panel 2
+                    <div className="w-1/3 h-screen overflow-hidden flex items-center justify-center">
+                        <video
+                            src="/website.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover object-center"
+                        />
                     </div>
 
                 </motion.div>

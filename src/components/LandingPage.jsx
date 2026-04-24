@@ -33,11 +33,11 @@ const LandingPage = () => {
                     />
                 </div>
                 <div className="masker pointer-events-none pl-[3vw] h-[55vh] flex flex-col justify-center z-10">
-                    {["Hello, I'm a", "Talented Dev", "Manas Kapoor"].map((item, index) => {
+                    {["Hello, I'm a", "FULL Stack Dev", "Manas Kapoor"].map((item, index) => {
                         return (
                             <div key={index} className={` ${index == 2 ? 'text-[#3B82F6]' : 'text-white'} ${index === 1 && 'flex justify-center items-center'} text-[8vw] font-bold leading-[14vh] tracking-tighter pointer-events-none`}>
                                 {index === 1 && <motion.div initial={{ x: "-250px" }} animate={{ x: 0 }} transition={{ duration: 0.8, ease: "easeOut", type: "spring", stiffness: 120, damping: 12, delay: 0.3 }} className='bg-blue-500 mt-3 mr-5 rounded-4xl w-[15vw] h-[10vh] text-3xl tracking-normal flex justify-center items-center overflow-hidden'>
-                                    <img className='object-cover rounded-4xl ' src="https://images.gr-assets.com/hostedimages/1412267837ra/11348431.gif" alt="" />
+                                    <img className='object-cover rounded-4xl ' src="https://media1.tenor.com/m/1ybUFYQpNDgAAAAd/death-note-light-yagami.gif" alt="" />
                                 </motion.div>}
                                 <motion.span
                                     key={index}
