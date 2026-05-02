@@ -3,7 +3,7 @@ import AboutContent from './AboutContent'
 
 const About = () => {
   return (
-    <div className='bg-zinc-800 relative w-full'>
+    <div className='bg-[#0B0F19] relative w-full'>
       <AboutContent />
     </div>
   )
