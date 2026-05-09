@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 
-const TOTAL_FRAMES = 210;
+const TOTAL_FRAMES = 105;
 
 export default function HeroSequenceBackground() {
     const canvasRef = useRef(null);
@@ -13,19 +13,32 @@ export default function HeroSequenceBackground() {
     useEffect(() => {
         let isCancelled = false;
         const loadBitmaps = async () => {
-            // Load sequentially to avoid network/CPU spiking on 210 massive images
-            for (let i = 1; i <= TOTAL_FRAMES; i++) {
-                if (isCancelled) break;
+            const loadFrame = async (i) => {
                 try {
-                    const src = `/seq1/ezgif-frame-${String(i).padStart(3, '0')}.jpg`;
+                    const src = `/seq1_png/frame-${String(i).padStart(3, '0')}.png`;
                     const response = await fetch(src);
                     const blob = await response.blob();
-                    // createImageBitmap decodes off-thread and stores a raw bitmap in GPU memory
                     const bitmap = await createImageBitmap(blob);
-                    imagesRef.current[i - 1] = bitmap;
+                    if (!isCancelled) {
+                        imagesRef.current[i - 1] = bitmap;
+                    }
                 } catch (err) {
                     console.error("Failed to load/decode frame", i, err);
                 }
+            };
+
+            // Load the first frame immediately for instant visual feedback
+            await loadFrame(1);
+
+            // Load the remaining frames in concurrent batches
+            const BATCH_SIZE = 8;
+            for (let i = 2; i <= TOTAL_FRAMES; i += BATCH_SIZE) {
+                if (isCancelled) break;
+                const batch = [];
+                for (let j = 0; j < BATCH_SIZE && i + j <= TOTAL_FRAMES; j++) {
+                    batch.push(loadFrame(i + j));
+                }
+                await Promise.all(batch);
             }
         };
 
@@ -69,12 +82,23 @@ export default function HeroSequenceBackground() {
 
             // 6. Sub-frame Alpha Blending
             const currentFrame = smoothedFrameRef.current;
-            const frameIndex = Math.floor(currentFrame);
-            const nextFrameIndex = Math.min(frameIndex + 1, TOTAL_FRAMES - 1);
-            const fractionalFrame = currentFrame - frameIndex;
+            let frameIndex = Math.floor(currentFrame);
+            let nextFrameIndex = Math.min(frameIndex + 1, TOTAL_FRAMES - 1);
+            let fractionalFrame = currentFrame - frameIndex;
 
-            const img1 = imagesRef.current[frameIndex];
-            const img2 = imagesRef.current[nextFrameIndex];
+            let img1 = imagesRef.current[frameIndex];
+            let img2 = imagesRef.current[nextFrameIndex];
+
+            // Fallback: If current frame isn't loaded yet, find the closest previously loaded frame
+            if (!img1) {
+                for (let i = frameIndex - 1; i >= 0; i--) {
+                    if (imagesRef.current[i]) {
+                        img1 = imagesRef.current[i];
+                        fractionalFrame = 0; // Disable blending if we are falling back
+                        break;
+                    }
+                }
+            }
 
             if (img1) {
                 const imgRatio = img1.width / img1.height;
