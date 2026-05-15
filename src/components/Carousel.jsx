@@ -12,7 +12,7 @@ const projects = [
         link: "https://www.beingan.engineer/",
     },
     {
-        title: "Desktop Notes WebApp",
+        title: "Desktop Notes Application",
         src: "/images/Project2.png",
         color: "#1a1a2e",
         link: "https://github.com/BeingAlmighty/DesktopNotes",
