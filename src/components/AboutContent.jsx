@@ -21,7 +21,7 @@ const TechFocus = () => {
           transition={{ delay: i * 0.1, duration: 0.4, ease: "easeOut" }}
           className="group/row relative flex flex-col items-start gap-1.5 px-4 py-2.5 -mx-4 rounded-xl cursor-default transition-all duration-300 opacity-100 group-hover/list:opacity-30 hover:!opacity-100 hover:bg-white/[0.04]"
         >
-          {/* Crisp Structural Marker */}
+
           <div className="absolute left-0 top-3 bottom-3 w-[2px] bg-zinc-200 scale-y-0 origin-top transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/row:scale-y-100 rounded-full"></div>
 
           <span className="text-[11px] font-bold tracking-widest text-zinc-500 uppercase transition-all duration-300 group-hover/row:text-zinc-200 group-hover/row:translate-x-1">
@@ -61,10 +61,8 @@ const HowIBuild = () => {
 
   return (
     <div ref={containerRef} className="relative flex flex-col justify-between gap-6 px-6 sm:px-8 py-4 h-full min-h-[250px]">
-      {/* Background Track */}
       <div className="absolute left-[2.75rem] sm:left-[3.25rem] top-8 bottom-8 w-[2px] bg-white/5 rounded-full"></div>
 
-      {/* Animated Scroll Highlight Line */}
       <motion.div
         className="absolute left-[2.75rem] sm:left-[3.25rem] top-8 bottom-8 w-[2px] bg-gradient-to-b from-[#3B82F6] to-[#06B6D4] origin-top rounded-full shadow-[0_0_10px_#3B82F6]"
         style={{ scaleY: scrollYProgress }}
@@ -148,8 +146,8 @@ export default function AboutContent() {
     return (
       <div className="bg-[#132338] rounded-md p-2 sm:p-3 w-35 flex flex-col items-center justify-center border border-white/5 shadow-none">
         <div style={{ color: colorCode }} className="font-medium text-sm">{title}</div>
-        <div className="text-zinc-300 text-sm font-semibold mt-1 flex items-baseline gap-0.5">
-          {solved}<span className="text-zinc-600 text-xs font-normal">/{total}</span>
+        <div className="text-zinc-300 text-md font-semibold mt-1 flex items-baseline gap-0.5">
+          {solved}
         </div>
       </div>
     );
@@ -157,7 +155,7 @@ export default function AboutContent() {
 
   const arcStart = 225;
 
-  // Refined Leetcode official colors
+ // Leetcode Colors
   const colorEasy = "#00b8a3"; // Teal
   const bgEasy = "#00b8a333";
   const colorMed = "#ffc01e";  // Yellow
@@ -193,7 +191,7 @@ export default function AboutContent() {
         </p>
         <div className="grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
 
-          {/* LeetCode Card (Left, Spans 2 Rows) */}
+          {/* LeetCode Card */}
           <div className="relative lg:row-span-2 group">
             <div className="absolute inset-px rounded-lg bg-[#111827] lg:rounded-l-4xl border border-white/5 transition-colors duration-500 group-hover:border-white/10" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
@@ -251,7 +249,7 @@ export default function AboutContent() {
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/5 lg:rounded-l-4xl" />
           </div>
 
-          {/* Tech Focus (Middle Top) */}
+          {/* Tech Focus */}
           <div className="relative max-lg:row-start-1 group">
             <div className="absolute inset-px rounded-lg bg-[#111827] border border-white/5 max-lg:rounded-t-4xl transition-colors duration-500 group-hover:border-white/10" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
@@ -268,7 +266,7 @@ export default function AboutContent() {
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/5 max-lg:rounded-t-4xl" />
           </div>
 
-          {/* How I Build (Middle Bottom) */}
+          {/* How I Build */}
           <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2 group">
             <div className="absolute inset-px rounded-lg bg-[#111827] border border-white/5 transition-colors duration-500 group-hover:border-white/10" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
@@ -285,7 +283,7 @@ export default function AboutContent() {
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/5" />
           </div>
 
-          {/* My Journey (Right, Spans 2 Rows) */}
+          {/* My Journey */}
           <div className="relative lg:row-span-2 group">
             <div className="absolute inset-px rounded-lg bg-[#111827] border border-white/5 max-lg:rounded-b-4xl lg:rounded-r-4xl transition-colors duration-500 group-hover:border-white/10" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">

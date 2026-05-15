@@ -10,6 +10,8 @@ const FlipLink = ({ children, href }) => {
       initial="initial"
       whileHover="hovered"
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="relative block overflow-hidden whitespace-nowrap text-4xl font-black uppercase sm:text-7xl md:text-8xl lg:text-9xl"
       style={{
         lineHeight: 0.9,
@@ -38,6 +40,7 @@ const FlipLink = ({ children, href }) => {
           </motion.span>
         ))}
       </div>
+
       <div className="absolute inset-0">
         {children.split("").map((l, i) => (
           <motion.span

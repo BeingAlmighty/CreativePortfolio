@@ -1,11 +1,10 @@
 @import "tailwindcss";
 
 body {
-  background-color: #09090b; /* zinc-950 */
-  color: #e4e4e7; /* zinc-200 */
+  background-color: #09090b;
+  color: #e4e4e7; 
 }
 
-/* Hide scrollbar globally for a cleaner look */
 ::-webkit-scrollbar {
   display: none;
 }

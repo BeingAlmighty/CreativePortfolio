@@ -8,13 +8,13 @@ const Project = () => {
         autoRaf: true,
     });
     
-    // Mobile Ref & Scroll
+    // For Mobile Scrolling
     const ref = useRef(null);
     const { scrollYProgress: mobileScroll } = useScroll({ target: ref });
     const mobileY = useTransform(mobileScroll, [0, 0.8], ["0vh", "-300vh"]);
     const mobileX = useTransform(mobileScroll, [0.8, 1], ["0vw", "-100vw"]);
 
-    // Desktop Ref & Scroll
+    // For Desktop Scrolling
     const desktopRef = useRef(null);
     const { scrollYProgress: desktopScroll } = useScroll({ target: desktopRef });
     const desktopX = useTransform(desktopScroll, [0.1, 1], ["0%", "-25%"]);

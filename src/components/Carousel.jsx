@@ -6,24 +6,28 @@ import { createPortal } from "react-dom";
 
 const projects = [
     {
-        title: "Digital Agency",
-        src: "/images/project_1.png",
+        title: "Creative Agency Experience",
+        src: "/images/Project1.png",
         color: "#000000",
+        link: "https://www.beingan.engineer/",
     },
     {
-        title: "E-commerce Dash",
-        src: "/images/project_2.png",
+        title: "Desktop Notes WebApp",
+        src: "/images/Project2.png",
         color: "#1a1a2e",
+        link: "https://github.com/BeingAlmighty/DesktopNotes",
     },
     {
-        title: "Neon App",
-        src: "/images/project_3.png",
+        title: "GSOC Org Live Tracker",
+        src: "/images/Project3.png",
         color: "#16003B",
+        link: "https://gsoc-orgs-frontend.vercel.app/",
     },
     {
-        title: "AI Tool",
-        src: "/images/project_4.png",
+        title: "Quiz Automation Extension",
+        src: "/images/Project4.png",
         color: "#0d0221",
+        link: "https://github.com/BeingAlmighty/quizAutomation",
     },
 ];
 
@@ -86,7 +90,7 @@ export default function Carousel({ isMobile = false }) {
             className="flex flex-col md:flex-row items-center justify-center min-h-[50vh] md:min-h-screen w-full md:w-screen text-white overflow-hidden"
         >
 
-            {/* PROJECT LIST */}
+            {/* Project List */}
             <div className={`w-full h-full flex ${isMobile ? 'flex-col' : 'flex-row'} hide-scrollbar`}>
 
                 {projects.map((project, i) => (
@@ -94,9 +98,9 @@ export default function Carousel({ isMobile = false }) {
                         key={i}
                         onMouseEnter={(e) => manageModal(true, i, e.clientX, e.clientY)}
                         onMouseLeave={(e) => manageModal(false, i, e.clientX, e.clientY)}
-                        className={`group relative text-5xl border-white h-screen flex-shrink-0 font-semibold cursor-pointer transition-all duration-500 overflow-hidden ${
-                            isMobile ? 'w-full border-b-2' : 'flex-1 w-[25vw] border-r-2'
-                        }`}
+                        onClick={() => window.open(project.link, '_blank')}
+                        className={`group relative text-5xl border-white h-screen flex-shrink-0 font-semibold cursor-pointer transition-all duration-500 overflow-hidden ${isMobile ? 'w-full border-b-2' : 'flex-1 w-[25vw] border-r-2'
+                            }`}
                     >
                         <img className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out" src={project.src} alt="" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:bg-black/40 transition duration-500"></div>
@@ -106,7 +110,7 @@ export default function Carousel({ isMobile = false }) {
                             <p className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-lg font-normal flex items-center gap-2">
                                 <span>View Project</span>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </p>
                         </div>
@@ -117,7 +121,6 @@ export default function Carousel({ isMobile = false }) {
 
             {mounted && createPortal(
                 <>
-                    {/* IMAGE MODAL */}
                     <motion.div
                         ref={modalContainer}
                         variants={scaleAnimation}
@@ -144,7 +147,7 @@ export default function Carousel({ isMobile = false }) {
                         </div>
                     </motion.div>
 
-                    {/* CURSOR CIRCLE */}
+                    {/* Cursor Circle */}
                     <motion.div
                         ref={cursor}
                         variants={scaleAnimation}
@@ -153,7 +156,7 @@ export default function Carousel({ isMobile = false }) {
                         className={`fixed w-[80px] h-[80px] rounded-full bg-blue-600 pointer-events-none z-50 ${isMobile ? 'xl:hidden' : 'hidden xl:block'}`}
                     />
 
-                    {/* CURSOR TEXT */}
+                    {/* Cursor Text */}
                     <motion.div
                         ref={cursorLabel}
                         variants={scaleAnimation}
