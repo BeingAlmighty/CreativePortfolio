@@ -200,7 +200,7 @@ const LandingPage = () => {
             <Project />
             <section className="grid relative z-10 place-content-center gap-2 bg-zinc-700 px-8 py-24 text-black text-center w-full">
 
-                <FlipLink href="#"
+                <FlipLink href="https://drive.google.com/file/d/1lhxT4RBWlrfRiIyTlCMk44zeCW8bjNIH/view?usp=sharing"
                 >
                     Resume
                 </FlipLink>
