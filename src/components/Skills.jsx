@@ -1,8 +1,12 @@
 import React from 'react'
 import { useRef } from 'react';
 import { motion, useTransform, useScroll } from 'motion/react';
+import { useSectionTransition } from '../context/TransitionContext';
 
 const Skills = () => {
+  const { transitionState } = useSectionTransition();
+  const isVisible = transitionState === 'idle' || transitionState === 'entering';
+
   const techStacks = [
     {
       name: 'Next.js',
@@ -120,17 +124,26 @@ const Skills = () => {
     target: ref,
     offset: ["start end", "end start"]
   })
-  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
-  const x2 = useTransform(scrollYProgress, [0, 1], ["-15%", "0%"]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["-10%", "0%"]);
 
   return (
     <div
+      id="skills"
       ref={ref}
-      className='relative z-20 h-[100vh] sm:h-[130vh] -mt-[100vh] sm:-mt-[130vh] pointer-events-none'
+      className='relative z-20 h-[80vh] sm:h-[110vh] -mt-[80vh] sm:-mt-[110vh] pointer-events-none'
     >
-      <div className='bg-zinc-900 pointer-events-auto h-auto sm:h-[32vh] xl:h-[32vh] sticky top-[10vh] sm:top-[69vh] xl:top-[69vh] w-full overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.8)] py-8 sm:py-0 border-t border-white/5 flex'>
+      <motion.div 
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        variants={{
+            hidden: { opacity: 0, y: 40 },
+            visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+        }}
+        className='bg-zinc-900 pointer-events-auto h-auto sm:h-[32vh] xl:h-[32vh] sticky top-[10vh] sm:top-[69vh] xl:top-[69vh] w-full overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.8)] py-8 sm:py-0 border-t border-white/5 flex'
+      >
 
-        <div className='flex flex-col justify-center items-center h-full w-full'>
+        <div className='flex flex-col justify-center items-center w-full h-full'>
 
           {/* Mobile Layout */}
           <div className='sm:hidden w-full px-4 grid grid-cols-3 gap-4'>
@@ -221,7 +234,7 @@ const Skills = () => {
 
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

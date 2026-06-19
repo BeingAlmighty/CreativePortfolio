@@ -1,13 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import Lenis from 'lenis'
 import Carousel from './Carousel'
+import { useSectionTransition } from '../context/TransitionContext'
 
 const Project = () => {
-    const lenis = new Lenis({
-        autoRaf: true,
-    });
-    
+    const { transitionState } = useSectionTransition();
+    const isVisible = transitionState === 'idle' || transitionState === 'entering';
     // For Mobile Scrolling
     const ref = useRef(null);
     const { scrollYProgress: mobileScroll } = useScroll({ target: ref });
@@ -20,7 +18,16 @@ const Project = () => {
     const desktopX = useTransform(desktopScroll, [0.1, 1], ["0%", "-25%"]);
 
     return (
-        <>
+        <div id="portfolio">
+            <motion.div
+                initial="hidden"
+                animate={isVisible ? "visible" : "hidden"}
+                variants={{
+                    hidden: { opacity: 0, x: -40 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } }
+                }}
+                className="w-full h-full"
+            >
             {/* MOBILE VERSION */}
             <section ref={ref} className="xl:hidden relative h-[500vh] bg-black">
                 <div className="sticky top-0 h-screen overflow-hidden">
@@ -70,7 +77,8 @@ const Project = () => {
                     </motion.div>
                 </div>
             </section>
-        </>
+            </motion.div>
+        </div>
     );
 };
 

@@ -87,9 +87,6 @@ const Preloader = ({ onComplete }) => {
                 </motion.div>
 
                 <div className="absolute bottom-[10%] w-[60%] max-w-lg flex flex-col items-center gap-3 z-10">
-                    <div className="w-full flex justify-center text-zinc-500 font-mono text-xs tracking-[0.3em] uppercase">
-                        System Initialization
-                    </div>
                     <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
                         <motion.div 
                             className="h-full bg-white"

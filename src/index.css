@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@800&display=swap');
+
+.font-sora {
+  font-family: 'Sora', sans-serif !important;
+}
 
 body {
   background-color: #09090b;
@@ -19,4 +24,30 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none;  
   scrollbar-width: none;  
+}
+
+:root {
+  --hero-bg: #09090b;
+  --hero-text: #a1a1aa;
+  --hero-heading: rgba(255, 255, 255, 0.95);
+  --hero-accent: #3b82f6;
+  --hero-border: rgba(255, 255, 255, 0.05);
+  --hero-glass-bg: rgba(255, 255, 255, 0.03);
+  --hero-glow: rgba(0,0,0,0);
+  --hero-noise-opacity: 0;
+  --hero-rim-light: drop-shadow(0 0 0px rgba(0,0,0,0));
+  --hero-blend-mode: normal;
+}
+
+.theme-reveal {
+  --hero-bg: #5EA8FF; /* Solid electric blue background for the entire reveal layer! */
+  --hero-text: #09090b; /* Dark text inside the blue circle */
+  --hero-heading: #000000; /* Solid black text for the headings */
+  --hero-accent: #ffffff; /* White accents */
+  --hero-border: rgba(0, 0, 0, 0.2);
+  --hero-glass-bg: rgba(0, 0, 0, 0.1);
+  --hero-glow: rgba(0, 0, 0, 0.2);
+  --hero-noise-opacity: 0.15;
+  --hero-rim-light: drop-shadow(0 0 0px transparent);
+  --hero-blend-mode: multiply; /* Darker noise blending for the blue background */
 }

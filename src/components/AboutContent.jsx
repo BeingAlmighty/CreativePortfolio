@@ -45,6 +45,28 @@ const TechFocus = () => {
   )
 }
 
+const StepItem = ({ step, i, scrollYProgress }) => {
+  const start = i * 0.25;
+  const end = (i + 1) * 0.25;
+
+  const opacity = useTransform(scrollYProgress, [Math.max(0, start - 0.1), start, end, Math.min(1, end + 0.1)], [0.3, 1, 1, 0.3]);
+  const textShadow = useTransform(scrollYProgress, [start, start + 0.1], ["0px 0px 0px transparent", "0px 0px 12px rgba(6,182,212,0.5)"]);
+  const color = useTransform(scrollYProgress, [start, start + 0.1], ["#71717A", "#FFFFFF"]);
+
+  return (
+    <motion.div style={{ opacity }} className="relative flex items-center gap-6 group">
+      <span className="text-4xl font-bold text-white/5 font-mono select-none w-10 text-right tracking-tighter">
+        {step.num}
+      </span>
+      <div className="z-10 flex-1">
+        <motion.h4 style={{ textShadow, color }} className="text-[13px] font-bold uppercase tracking-wider">
+          {step.title}
+        </motion.h4>
+      </div>
+    </motion.div>
+  );
+};
+
 const HowIBuild = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -68,27 +90,9 @@ const HowIBuild = () => {
         style={{ scaleY: scrollYProgress }}
       />
 
-      {steps.map((step, i) => {
-        const start = i * 0.25;
-        const end = (i + 1) * 0.25;
-
-        const opacity = useTransform(scrollYProgress, [Math.max(0, start - 0.1), start, end, Math.min(1, end + 0.1)], [0.3, 1, 1, 0.3]);
-        const textShadow = useTransform(scrollYProgress, [start, start + 0.1], ["0px 0px 0px transparent", "0px 0px 12px rgba(6,182,212,0.5)"]);
-        const color = useTransform(scrollYProgress, [start, start + 0.1], ["#71717A", "#FFFFFF"]);
-
-        return (
-          <motion.div key={i} style={{ opacity }} className="relative flex items-center gap-6 group">
-            <span className="text-4xl font-bold text-white/5 font-mono select-none w-10 text-right tracking-tighter">
-              {step.num}
-            </span>
-            <div className="z-10 flex-1">
-              <motion.h4 style={{ textShadow, color }} className="text-[13px] font-bold uppercase tracking-wider">
-                {step.title}
-              </motion.h4>
-            </div>
-          </motion.div>
-        )
-      })}
+      {steps.map((step, i) => (
+        <StepItem key={i} step={step} i={i} scrollYProgress={scrollYProgress} />
+      ))}
     </div>
   )
 }
