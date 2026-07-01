@@ -9,7 +9,7 @@ const projects = [
         title: "Creative Agency Experience",
         src: "/images/Project1.png",
         color: "#000000",
-        link: "https://www.beingan.engineer/",
+        link: "https://solvexx.vercel.app/",
     },
     {
         title: "Desktop Notes Application",
